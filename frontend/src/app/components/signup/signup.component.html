@@ -1,0 +1,15 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <input matInput placeholder="Email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <input matInput placeholder="Email" formControlName="email2">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <input matInput formControlName="pass">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <input matInput formControlName="pass2">
+    </mat-form-field>
+    <button mat-button type="submit">Create Account</button>
+</form>
