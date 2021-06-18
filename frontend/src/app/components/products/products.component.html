@@ -6,7 +6,7 @@
 </form>
 <span>
     <mat-list *ngFor="let category of categories">
-        <button mat-button onClick="this.searchButton();">{{category.Name}}</button> <!--falla onclick (?)-->
+        <button mat-button (click)="this.searchButton(category.Name);">{{category.Name}}</button> <!--falla onclick (?)-->
     </mat-list>
 </span>
 <div>

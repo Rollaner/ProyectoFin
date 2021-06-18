@@ -12,8 +12,8 @@ export class SignupComponent implements OnInit {
     this.signupForm = this.fb.group({
       email: ['', Validators.required], //chequear validar email
       email2: ['', Validators.required],
-      pass:['', Validators.required],
-      pass2:['', Validators.required]
+      pass:['', Validators.required, Validators.minLength(8)],
+      pass2:['', Validators.required, Validators.minLength(8)]
     });
    }
 
@@ -23,5 +23,10 @@ export class SignupComponent implements OnInit {
   onSubmit(){
     console.log(this.signupForm.value); //cerciorarse que email 1 == email 2, idem con pass
   }
-
+  /* if(this.signupForm.value.email!=this.signupForm.value.email2){
+      this.signupForm.invalid
+    }
+    if(this.signupForm.value.pass!=this.signupForm.value.pass2){
+      this.signupForm.invalid
+    } */
 }
