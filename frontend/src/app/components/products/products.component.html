@@ -13,12 +13,14 @@
 <mat-list *ngFor="let product of products"> <!-- En la barra se puede añadir autocompletar para facilitar la busqueda -->
     <mat-card *ngIf="default">{{product.Name}}
         <mat-card-actions>
-            <button mat-button>Add to cart</button>
+            <button [routerLink]="['/products', product.Name]"
+            routerLinkActive="router-link-active" mat-button>View Product</button>
         </mat-card-actions>
     </mat-card>
     <mat-card *ngIf="product.Category == search">{{product.Name}}
         <mat-card-actions>
-            <button mat-button>Add to cart</button>
+            <button mat-button [routerLink]="['/products', product.Name]"
+            routerLinkActive="router-link-active">View Product</button>
         </mat-card-actions>
     </mat-card>
     <h3 *ngIf="empty">Nothing found</h3>

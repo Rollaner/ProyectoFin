@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   constructor(private fb:FormBuilder) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required], //chequear validar email
+      email: ['', Validators.required, Validators.email],
       pass:['', Validators.required]
     });
    }
