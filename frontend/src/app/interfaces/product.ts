@@ -5,5 +5,4 @@ export interface Product {
     Price: number;
     Rating: number;
     ID: number;
-    Img: String;
 }

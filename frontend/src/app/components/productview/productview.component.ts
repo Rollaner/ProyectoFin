@@ -16,7 +16,6 @@ export class ProductviewComponent implements OnInit {
     Price: 1,
     Rating: 1,
     ID: 1,
-    Img: "test"
   }
 
   suscription;

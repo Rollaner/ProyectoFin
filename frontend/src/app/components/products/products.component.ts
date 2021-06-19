@@ -11,7 +11,7 @@ import { FormBuilder,FormGroup } from '@angular/forms';
 export class ProductsComponent implements OnInit {
 
   products: Product[] = [
-    {Name:"TEST", Stock:1, Category:"TESTCat", Price:1, Rating:5, ID:999999, Img: "test"}
+    {Name:"TEST", Stock:1, Category:"TESTCat", Price:1, Rating:5, ID:999999}
   ];
   categories: Category[] = [
     {Name:"TESTCat",ID:999999}

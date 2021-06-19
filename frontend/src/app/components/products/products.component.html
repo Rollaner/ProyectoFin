@@ -13,7 +13,6 @@
 <mat-list *ngFor="let product of products"> <!-- En la barra se puede añadir autocompletar para facilitar la busqueda -->
     <mat-card *ngIf="default">{{product.Name}}
         <mat-card-actions>
-            <img mat-card-image src={{product.Img}} alt="Picture of product.Name"> <!-- Fix img-->
             <button [routerLink]="['/products', product.Name]"
             routerLinkActive="router-link-active" mat-button>View Product</button>
         </mat-card-actions>
