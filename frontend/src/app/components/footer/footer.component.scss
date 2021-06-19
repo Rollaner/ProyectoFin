@@ -1,0 +1,30 @@
+
+#about{
+    color: lightcoral;
+    font-size: xx-large;
+    display: block;
+    background-color:#263238 ;
+}
+#contact{
+    display: block;
+    float: left;
+    background-color: #263238;
+    color: lightcyan;
+}
+.filler{
+    flex: 1 1 auto;
+    background-color:#263238;
+    color: #263238;
+}
+#legal{
+    display: block;
+    fill: #263238;
+    float:right;
+    margin-left: 10%;
+    background-color: #263238;
+    color: lightcyan;
+}
+#legal p{
+    margin-left: 2%;
+    text-justify: newspaper;
+}

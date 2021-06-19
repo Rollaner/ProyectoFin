@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SignupComponent } from './components/signup/signup.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CartComponent } from './components/cart/cart.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { CartComponent } from './components/cart/cart.component';
     MatInputModule,
     MatSelectModule,
     MatListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
