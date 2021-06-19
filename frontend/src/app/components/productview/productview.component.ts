@@ -16,17 +16,16 @@ export class ProductviewComponent implements OnInit {
     Price: 1,
     Rating: 1,
     ID: 1,
+    Img: "test"
   }
 
-  param;
+  suscription;
 
   constructor(private route:ActivatedRoute) {
 
-    this.param = this.route.paramMap.subscribe(params =>{
-      if(params.get("id") != null){
-        let aux = parseInt(params.get("id")!,10)
-        this.product.ID = aux;
-      }  
+    this.suscription = this.route.paramMap.subscribe(params =>{
+      if(params.get("name") != null)
+        this.product.Name = params.get("name"); 
     }); 
 
    }
