@@ -5,4 +5,6 @@ export interface Product {
     Price: number;
     Rating: number;
     ID: number;
+    Contador:number;
+    Promedio:number;
 }
