@@ -1,5 +1,5 @@
 import {Schema, model, Types} from "mongoose";
-const productSchema: Schema = new Schema({
+const productoSchema: Schema = new Schema({
     Name: {type: String, required: true},
     Stock: {type: Number},
     Description: {type: String, required: true},
@@ -8,4 +8,4 @@ const productSchema: Schema = new Schema({
     Rating: {type: Number}
 });
 
-export default model('Product', productSchema, 'Products');
+export default model('Producto', productoSchema, 'Productos');

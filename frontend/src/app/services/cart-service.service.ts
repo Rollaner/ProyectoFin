@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
+import {ProductService} from './product.service'
+import {UserService} from './user.service'
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +13,14 @@ export class CartServiceService {
   cart = new Subject<Product[]>(); //Carrito
   avisoCart$ = this.cart.asObservable(); //Observable del carrito
   contador:number = 0;  
-  productStorage:Product[] = [] //Array de memoria del carrito
+  productStorage:Product[] = []; //Array de memoria del carrito
+  stock:number = 0
 
-  constructor() { }
+  private baseURL:string;
+
+  constructor(private httpclient:HttpClient , private productService:ProductService, userService:UserService) {
+    this.baseURL = 'http://localhost:5000/api'
+   }
 
   updateCart(item:Product){
     this.productStorage.push(item);
@@ -35,4 +42,5 @@ export class CartServiceService {
   getCartData():Observable<Product[]>{
     return this.avisoCart$;
   }
+
 }

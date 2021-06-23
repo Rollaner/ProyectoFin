@@ -1,23 +1,21 @@
 import { Producto } from "../../models/producto.model";
 import productoSchema from "./producto.schema";
 
-const PRODUCTS: Producto[] = [
-    {   _id: "1",
-        Name: "Reality dethreader",
-        Stock: 2,
-        Description: "For when nukes don't cut it",
-        Category: "WMD",
-        Price: 200000,
-        Rating: 1
-    }
-]
-
-/* function getAllProductos(){
+function getAllProductos(){
     return productoSchema.find();
-}*/
-
-function getAllProductos():Producto[]{
-    return PRODUCTS;
 }
 
-export default {getAllProductos};
+function getProductoById(id: string){
+    return productoSchema.findOne({ _id: id});
+}
+function addProducto(producto: Producto){
+    return productoSchema.create(producto);
+}
+function updateProducto(id: string, producto: Producto){
+    return productoSchema.findByIdAndUpdate(id, producto, {new: true});
+}
+
+
+
+
+export default {getAllProductos, getProductoById, addProducto, updateProducto};
