@@ -1,16 +1,18 @@
-<p>productview works!</p>
+
 <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{producto.Name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>stock</p>
-      <p>categoria</p>
-      <p>precio</p>
-      <p>rating</p>
+      <p>{{producto.Stock}}</p>
+      <p>{{producto.Category}}</p>
+      <p>{{producto.Price}}</p>
+
+      <p>{{producto.Rating}}</p>
+      <h4>{{producto.Contador}} han usado y calificado este producto</h4>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>Agregar al Carrito</button>
+      <button mat-button (click)="this.agregarCarrito()" *ngIf="hayStock()">Agregar al Carrito</button>
     </mat-card-actions>
 </mat-card>

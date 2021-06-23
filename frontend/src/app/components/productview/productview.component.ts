@@ -11,13 +11,30 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductviewComponent implements OnInit {
   @Input() ID: String;
-  public producto: Product;
+  private producto: Product;
 
-  constructor(private route: ActivatedRoute, private cartServiceService: CartServiceService, private productService: ProductService) { }
+  constructor(private _snackBar: MatSnackBar,private route: ActivatedRoute, private cartServiceService: CartServiceService, private productService: ProductService) { }
 
   async ngOnInit(): Promise<void> {
-    this.producto= await this.productService.getProduct(this.ID).toPromise();
+    try{
+      this.producto= await this.productService.getProduct(this.ID).toPromise();
+    }
+    catch{
+      console.log("error");
+    }
   }
-
+  agregarCarrito(){
+    this.cartServiceService.updateCart(this.producto);
+  }
+  hayStock(){
+    if(this.producto.Stock>0){
+      return true;
+    }
+    else{
+      this._snackBar.open("No hay Stock", "Ok");
+      return false;
+    }
+  }
+  
 }
 
