@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../interfaces/product';
+import { Component, OnInit, Input } from '@angular/core';
+import { CartServiceService} from 'src/app/services/cart-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { Product } from 'src/app/interfaces/product';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-productview',
@@ -8,28 +10,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./productview.component.scss']
 })
 export class ProductviewComponent implements OnInit {
+  @Input() ID: String;
+  public producto: Product;
 
-  product:Product = {
-    Name: "",
-    Stock: 1,
-    Category: "",
-    Price: 1,
-    Rating: 1,
-    ID: 1,
-  }
+  constructor(private route: ActivatedRoute, private cartServiceService: CartServiceService, private productService: ProductService) { }
 
-  suscription;
-
-  constructor(private route:ActivatedRoute) {
-
-    this.suscription = this.route.paramMap.subscribe(params =>{
-      if(params.get("name") != null)
-        this.product.Name = params.get("name"); 
-    }); 
-
-   }
-
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.producto= await this.productService.getProduct(this.ID).toPromise();
   }
 
 }
+

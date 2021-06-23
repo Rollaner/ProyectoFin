@@ -6,4 +6,6 @@ export interface Producto {
     Category: string;
     Price: number;
     Rating: number;
+    Contador:number;
+    Promedio:number;
 }

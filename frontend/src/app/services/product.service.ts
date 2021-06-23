@@ -7,21 +7,21 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class ProductService {
-  private baseURL:string;
+  private baseURL:String;
 
   constructor(private httpclient:HttpClient, private userService:UserService) {
     this.baseURL = 'http://localhost:5000/api'
    }
 
   public getAllProducts(){
-    return this.httpclient.get(this.baseURL+'/Productos/all');
+    return this.httpclient.get<Product[]>(this.baseURL+'/producto/all');
   }
 
   public updateProduct(producto:Product){
-    return this.httpclient.patch(this.baseURL+ '/Productos/update', producto);
+    return this.httpclient.patch(this.baseURL+ '/producto/update', producto);
  }
 
-  public getProduct(ID:string){
-    return this.httpclient.get(this.baseURL + '/Productos/' + ID);
+  public getProduct(ID:String){
+    return this.httpclient.get<Product>(this.baseURL + '/producto/' + ID);
   }
 }
