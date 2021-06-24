@@ -12,6 +12,6 @@
     <mat-form-field appearance="fill">
         <input matInput type="password" formControlName="pass2">
     </mat-form-field>
-    <button mat-button type="submit">Create Account</button>
+    <button *ngIf="signupForm.valid" mat-button type="submit">Create Account</button>
 </form>
-<div *ngIf="!signupForm.valid">Error, revise los datos ingresados</div>
+<div *ngIf="err()">Error, revise los datos ingresados</div>

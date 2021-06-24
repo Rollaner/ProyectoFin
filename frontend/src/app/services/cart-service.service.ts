@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/product';
+import { CartInterface } from '../interfaces/cart/cart-interface';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import {ProductService} from './product.service'
@@ -10,11 +11,11 @@ import {UserService} from './user.service'
 })
 export class CartServiceService {
 
-  cart = new Subject<Product[]>(); //Carrito
+  cart = new Subject<CartInterface[]>(); //Carrito
   avisoCart$ = this.cart.asObservable(); //Observable del carrito
   contador:number = 0;  
-  productStorage:Product[] = []; //Array de memoria del carrito
-  stock:number = 0
+  productStorage:CartInterface[] = []; //Array de memoria del carrito
+  stock:number = 0;
 
   private baseURL:string;
 
@@ -22,8 +23,20 @@ export class CartServiceService {
     this.baseURL = 'http://localhost:5000/api'
    }
 
+   convert(item: Product){
+     let aux: CartInterface = 
+     {
+      producto: item._id,
+      cant: 0,
+      stock: item.Stock,
+      price: item.Price,
+     }
+     return aux;
+   }
+
   updateCart(item:Product){
-    this.productStorage.push(item);
+    let aux = this.convert(item);
+    this.productStorage.push(aux);
     if(this.contador > 0){
       this.productStorage = this.productStorage.slice(-(this.contador+1)); //Elimina duplicados del array de memoria
     }
@@ -31,7 +44,26 @@ export class CartServiceService {
     this.cart.next(this.productStorage);
   }
 
-  deleteFromCart(aux:Product):Observable<Product[]>{
+  addToCart(item:Product):Observable<CartInterface[]>{
+    let aux = this.convert(item);
+    if(this.productStorage.indexOf(aux) >= 0){
+      this.productStorage[this.productStorage.indexOf(aux)].cant++
+    }
+    this.cart.next(this.productStorage);
+    return this.avisoCart$;
+  }
+
+  removeFromCart(item:Product):Observable<CartInterface[]>{
+    let aux = this.convert(item);
+    if(this.productStorage.indexOf(aux) >= 0){
+      this.productStorage[this.productStorage.indexOf(aux)].cant--
+    }
+    this.cart.next(this.productStorage);
+    return this.avisoCart$;
+  }
+
+  deleteFromCart(item:Product):Observable<CartInterface[]>{
+    let aux = this.convert(item);
     if(this.productStorage.indexOf(aux) >= 0){
       this.productStorage.splice(this.productStorage.indexOf(aux),1);
     }
@@ -39,7 +71,7 @@ export class CartServiceService {
     return this.avisoCart$;
   }
 
-  getCartData():Observable<Product[]>{
+  getCartData():Observable<CartInterface[]>{
     return this.avisoCart$;
   }
 

@@ -8,6 +8,7 @@ import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  submit: boolean = false;
   constructor(private fb:FormBuilder) {
     this.signupForm = this.fb.group({
       email: ['', Validators.required], //chequear validar email
@@ -22,6 +23,13 @@ export class SignupComponent implements OnInit {
 
   onSubmit(){
     console.log(this.signupForm.value); //cerciorarse que email 1 == email 2, idem con pass
+    this.submit = true;
+  }
+
+  err(){
+    if(this.signupForm.invalid && this.submit)
+      return true;
+    return false;  
   }
   /* if(this.signupForm.value.email!=this.signupForm.value.email2){
       this.signupForm.invalid

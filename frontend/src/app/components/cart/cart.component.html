@@ -1,8 +1,15 @@
 <div>
     <mat-list **ngFor="let product of products">
-        <span><mat-card>{{product.Name}}</mat-card><button mat-button (click)="this.removeItem(product.Name)">Remove</button></span>
+        <span><mat-card>{{product.Name}}
+                <mat-card-actions>
+                    <button mat-button (click)="this.addItem(product)">Add More</button>
+                    <button mat-button (click)="this.addLess(product)">Remove item</button>
+                </mat-card-actions>
+              </mat-card>
+            <button mat-button (click)="this.removeItem(product)">Delete from Cart</button>
+        </span>
     </mat-list>
 </div>
 <div>
-    <button mat-button (click)="this.purchaseCart()">Purchase cart</button>
+    <button mat-button *ngIf="error()" (click)="this.purchaseCart()">Purchase cart</button>
 </div>
