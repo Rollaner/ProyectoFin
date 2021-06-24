@@ -1,28 +1,33 @@
-<form [formGroup]="searchForm" (ngSubmit)="Search()">
-    <mat-form-field appearance="fill">
-        <input matInput placeholder="Search" formControlName="input">
-    </mat-form-field>
-    <button mat-button type="submit">Search</button> 
-</form>
-<span>
-    <mat-list *ngFor="let category of categories">
-        <button mat-button (click)="this.searchButton(category.Name);">{{category.Name}}</button> <!--falla onclick (?)-->
-    </mat-list>
-</span>
-<div>
-<mat-list *ngFor="let product of products"> <!-- En la barra se puede añadir autocompletar para facilitar la busqueda -->
-    <mat-card *ngIf="default">{{product.Name}}
-        <mat-card-actions>
-            <app-productview [routerLink]="['/products']" [ID]='product._id'
-            routerLinkActive="router-link-active" mat-button>View Product</app-productview>
-        </mat-card-actions>
-    </mat-card>
-    <mat-card *ngIf="product.Category == search">{{product.Name}}
-        <mat-card-actions>
-            <app-productview mat-button [routerLink]="['/products']" [ID]='product._id'
-            routerLinkActive="router-link-active">View Product</app-productview>
-        </mat-card-actions>
-    </mat-card>
-    <h3 *ngIf="empty">Nothing found</h3>
-</mat-list> 
-</div>
+<body>
+    
+    <form [formGroup]="searchForm" (ngSubmit)="Search()">
+        <mat-form-field appearance="fill" class="searchImput">
+            <input matInput placeholder="Search" formControlName="input" class="imputText">
+        </mat-form-field>
+        <button mat-button type="submit" class="searchButton">Search</button> 
+    </form>
+    <div class="todo">
+        <div class="categorias">
+            <mat-list *ngFor="let category of categories">
+                <button mat-button (click)="this.searchButton(category.Name);">{{category.Name}}</button> <!--falla onclick (?)-->
+            </mat-list>
+        </div>
+        <div class="listaProductos">
+            <mat-list *ngFor="let product of products"> <!-- En la barra se puede añadir autocompletar para facilitar la busqueda -->
+                <mat-card *ngIf="default">{{product.Name}}
+                    <mat-card-actions>
+                        <app-productview [routerLink]="['/products']" [ID]='product._id'
+                        routerLinkActive="router-link-active" mat-button>View Product</app-productview>
+                    </mat-card-actions>
+                </mat-card>
+                <mat-card *ngIf="product.Category == search">{{product.Name}}
+                    <mat-card-actions>
+                        <app-productview mat-button [routerLink]="['/products']" [ID]='product._id'
+                        routerLinkActive="router-link-active">View Product</app-productview>
+                    </mat-card-actions>
+                </mat-card>
+                <h3 *ngIf="empty">Nothing found</h3>
+            </mat-list> 
+        </div>
+    </div>
+</body>
