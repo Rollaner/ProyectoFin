@@ -1,10 +1,14 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
-        <input matInput placeholder="Email" formControlName="email">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <input matInput type="password" formControlName="pass">
-    </mat-form-field>
-    <button mat-button type="submit">Login</button>
-</form>
-
+<body>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div>
+            <p>FANCY STORE</p>
+        </div>
+        <mat-form-field appearance="fill" class="form1">
+            <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="form2">
+            <input matInput type="password" formControlName="pass" placeholder="password">
+        </mat-form-field>
+        <button mat-button type="submit">Login</button>
+    </form>
+</body>
