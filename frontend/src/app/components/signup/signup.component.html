@@ -1,17 +1,22 @@
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" id="signupForm">
-    <mat-form-field appearance="fill">
-        <input matInput placeholder="Email" formControlName="email">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <input matInput placeholder="Confirme su email" formControlName="email2">
-    </mat-form-field>
-    
-    <mat-form-field appearance="fill">
-        <input matInput type="password" formControlName="pass">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-        <input matInput type="password" formControlName="pass2">
-    </mat-form-field>
-    <button *ngIf="signupForm.valid" mat-button type="submit">Create Account</button>
-</form>
-<div *ngIf="err()">Error, revise los datos ingresados</div>
+<body>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" id="signupForm">
+        <div>
+            <p>SIGN UP</p>
+        </div>
+        <mat-form-field appearance="fill" class="form1">
+            <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="form2">
+            <input matInput placeholder="Confirm your Email" formControlName="email2">
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" class="form3">
+            <input matInput type="password" formControlName="pass" placeholder="Password">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="form4">
+            <input matInput type="password" formControlName="pass2" placeholder="Confirm your Password">
+        </mat-form-field>
+        <button mat-button type="submit">Create Account</button> <!--*ngIf="signupForm.valid"-->
+    </form>
+    <div *ngIf="err()">Error, revise los datos ingresados</div>
+</body>
