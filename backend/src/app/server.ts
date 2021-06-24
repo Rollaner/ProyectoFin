@@ -9,10 +9,10 @@ import usuario from "./components/usuario";
      const server: Express = express();
      const port: number = 5000;
 
+     server.use(cors());
      server.use(express.json());
-     server.use(cors);
      server.use('/api',producto,categoria,usuario);
-     
+
     
      try{
          await mongooseModule.connect();

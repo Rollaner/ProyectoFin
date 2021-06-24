@@ -19,7 +19,7 @@
 <div *ngIf="this.display">
   <form [formGroup]="Formulario" (ngSubmit)="calificarProducto()">
     <mat-form-field appearance="fill">
-      <mat-select formControlName="input"[errorStateMatcher]="matcher">
+      <mat-select formControlName="input">
         <mat-option value="1">1</mat-option>
         <mat-option value="2">2</mat-option>
         <mat-option value="3">3</mat-option>
@@ -30,12 +30,11 @@
     <button mat-button (click)="this.calificarProducto()">Calificar Producto</button>
   </form>
 </div>
-<!--<div>
+<div>
   <form [formGroup]="Comentario" (ngSubmit)="agregarComentario()">
     <mat-form-field appearance="fill">
       <textarea matInput placeholder="Comenta el producto" formControlName="comentario"></textarea>
     </mat-form-field>
-    <button mat-button (click)="this.Comentario()">Calificar Producto</button>
+    <button mat-button type="submit" >Calificar Producto</button>
   </form>
 </div>
--->

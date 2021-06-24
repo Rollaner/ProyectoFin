@@ -4,6 +4,7 @@ import { Category } from '../../interfaces/category';
 import { FormBuilder,FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -12,8 +13,10 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class ProductsComponent implements OnInit {
 
-  public products: Product[] 
-  public categories: Category[]
+  public products: Observable<Product[]> 
+  public categories: Observable<Category[]>
+  public productList: Product[]
+  public categorieList: Category[]
   selected: String = '';
   selectbool: boolean = false;
   searchForm:FormGroup;
@@ -24,13 +27,17 @@ export class ProductsComponent implements OnInit {
     this.searchForm = this.fb.group({
       input: [''],
     });
-    this.products = [];
    }
 
   async ngOnInit(): Promise<void> {
     this.default=true;
-    this.products= await this.productService.getAllProducts().toPromise();
-    this.categories= await this.categoryService.getAllCategories().toPromise();
+    this.products= await this.productService.getAllProducts();
+    this.products.subscribe(update =>(this.productList = update));
+    this.categories= await this.categoryService.getAllCategories();
+    this.categories.subscribe(update =>(this.categorieList = update));
+      //this.productService.getAllProducts().subscribe(update =>{this.products = update});;
+      console.log(this.productList)
+      //this.categoryService.getAllCategories().subscribe(update=>(this.categories = update));
   }
 
   Search(){
@@ -42,17 +49,15 @@ export class ProductsComponent implements OnInit {
 
   searchButton(cat:String){ //Dice que searchButton no esta definido (?)
     this.search=cat;
-    console.log(cat);
     this.default=false;
   }
 
   emptySearch():boolean {
     let i:number = 0;
-    for(i=0;i<this.products.length;i++){    
-      if(this.search == this.products[i].Category){
+    for(i=0;i<this.productList.length;i++){    
+      if(this.search == this.productList[i].Category){
         return false;
-      }
-      console.log(this.products[i].Category)  
+      } 
       return true;
     }
     return true;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { FormBuilder,FormGroup,Validators,AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
       email: ['', Validators.required], //chequear validar email
       email2: ['', Validators.required],
       pass:['', Validators.required, Validators.minLength(8)],
-      pass2:['', Validators.required, Validators.minLength(8)]
+      pass2:['', Validators.required, Validators.minLength(8)],
     });
    }
 
@@ -31,6 +31,14 @@ export class SignupComponent implements OnInit {
       return true;
     return false;  
   }
+
+  signupValidator(control: AbstractControl):{ [key: string]: boolean } | null {
+    if (control.value >= 18) {
+      return { 'age': true };
+    }
+    return null;
+  }
+
   /* if(this.signupForm.value.email!=this.signupForm.value.email2){
       this.signupForm.invalid
     }

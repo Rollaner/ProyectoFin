@@ -19,36 +19,37 @@ export class CartServiceService {
 
   private baseURL:string;
 
-  constructor(private httpclient:HttpClient , private productService:ProductService, userService:UserService) {
+  constructor(private productService:ProductService, userService:UserService) {
     this.baseURL = 'http://localhost:5000/api'
    }
 
-   convert(item: Product){
+   convert(item: Product):CartInterface{
      let aux: CartInterface = 
      {
-      producto: item._id,
-      cant: 0,
+      producto: item.Name,
+      cant: 1,
       stock: item.Stock,
       price: item.Price,
      }
+     console.log(aux);
      return aux;
    }
 
-  updateCart(item:Product){
+  updateCart(item:Product){ //Añadir nuevo item al carrito
     let aux = this.convert(item);
     this.productStorage.push(aux);
-    if(this.contador > 0){
+    if(this.contador > 0)
       this.productStorage = this.productStorage.slice(-(this.contador+1)); //Elimina duplicados del array de memoria
-    }
     this.contador++;
     this.cart.next(this.productStorage);
   }
 
-  addToCart(item:Product):Observable<CartInterface[]>{
+  addToCart(item:Product):Observable<CartInterface[]>{ //aumentar cantidad en el carrito
     let aux = this.convert(item);
     if(this.productStorage.indexOf(aux) >= 0){
       this.productStorage[this.productStorage.indexOf(aux)].cant++
     }
+    console.log(this.productStorage);
     this.cart.next(this.productStorage);
     return this.avisoCart$;
   }

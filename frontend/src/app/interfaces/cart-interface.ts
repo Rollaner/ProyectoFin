@@ -1,5 +1,5 @@
 export interface CartInterface {
-      producto: String,
+      producto: string,
       cant: number,
       stock: number,
       price: number,

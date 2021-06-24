@@ -14,13 +14,17 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class ProductviewComponent implements OnInit {
   @Input() ID: String;
-  private producto: Product;
-  private Formulario: FormGroup;
+  public producto: Product;
+  public Formulario: FormGroup;
+  public Comentario: FormGroup
   display: boolean = false;
 
   constructor(private fb:FormBuilder,private _snackBar: MatSnackBar, private cartServiceService: CartServiceService, private productService: ProductService) {
     this.Formulario = this.fb.group({
       input: ['', Validators.required],
+    });
+    this.Comentario = this.fb.group({
+      comentario: [''],
     });
    }
 
@@ -50,6 +54,10 @@ export class ProductviewComponent implements OnInit {
   }
   activarCalificacion(){
     this.display=true;
+  }
+
+  agregarComentario(){
+    console.log("comment")
   }
 }
 

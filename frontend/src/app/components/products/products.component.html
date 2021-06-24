@@ -1,5 +1,4 @@
 <body>
-    
     <form [formGroup]="searchForm" (ngSubmit)="Search()">
         <mat-form-field appearance="fill" class="searchImput">
             <input matInput placeholder="Search" formControlName="input" class="imputText">
@@ -8,12 +7,12 @@
     </form>
     <div class="todo">
         <div class="categorias">
-            <mat-list *ngFor="let category of categories">
+            <mat-list *ngFor="let category of categorieList">
                 <button mat-button (click)="this.searchButton(category.Name);">{{category.Name}}</button> <!--falla onclick (?)-->
             </mat-list>
         </div>
         <div class="listaProductos">
-            <mat-list *ngFor="let product of products"> <!-- En la barra se puede añadir autocompletar para facilitar la busqueda -->
+            <mat-list *ngFor="let product of productList"> <!-- En la barra se puede añadir autocompletar para facilitar la busqueda -->
                 <mat-card *ngIf="default">{{product.Name}}
                     <mat-card-actions>
                         <app-productview [routerLink]="['/products']" [ID]='product._id'

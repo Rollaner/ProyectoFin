@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/interfaces/product';
-import { CartInterface } from 'src/app/interfaces/cart/cart-interface';
+import { CartInterface } from 'src/app/interfaces/cart-interface';
 import { CartServiceService } from 'src/app/services/cart-service.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -19,8 +19,25 @@ export class CartComponent implements OnInit {
 
   }
 
+  convert(item:CartInterface):Product{
+    let aux:Product;
+    aux.Name = item.producto;
+    aux.Stock = item.stock;
+    aux.Price = item.price;
+    return aux;
+  }
+
   ngOnInit(): void {
-    this.cartService.getCartData().subscribe(update =>{this.cart=update}); //Updatea carrito con service
+    this.cartService.getCartData().subscribe(update =>{this.cart = update}); //Updatea carrito con service
+    this.display();
+  }
+
+  display(){
+    let i:number = 0;
+    this.cart.forEach(element => {
+      this.products[i]=this.convert(element);     
+      console.log(this.products[i]) 
+    });
   }
 
   removeItem(item: Product){
