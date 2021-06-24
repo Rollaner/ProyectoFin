@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../interfaces/product';
 import { Category } from '../../interfaces/category';
 import { FormBuilder,FormGroup } from '@angular/forms';
+import { ProductService } from 'src/app/services/product.service';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-products',
@@ -10,26 +12,25 @@ import { FormBuilder,FormGroup } from '@angular/forms';
 })
 export class ProductsComponent implements OnInit {
 
-  products: Product[] = [
-    {Name:"TEST", Stock:1, Category:"TESTCat", Price:1, Rating:5, ID:999999}
-  ];
-  categories: Category[] = [
-    {Name:"TESTCat",ID:999999}
-  ];
+  public products: Product[] 
+  public categories: Category[]
   selected: String = '';
   selectbool: boolean = false;
   searchForm:FormGroup;
   search: String = '';
   empty: boolean = false;
   default: boolean = true;
-  constructor(private fb:FormBuilder) {
+  constructor(private fb:FormBuilder, private productService:ProductService, private categoryService:CategoryService) {
     this.searchForm = this.fb.group({
       input: [''],
     });
+    this.products = [];
    }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.default=true;
+    this.products= await this.productService.getAllProducts().toPromise();
+    this.categories= await this.categoryService.getAllCategories().toPromise();
   }
 
   Search(){
