@@ -1,0 +1,42 @@
+$background:rgb(126, 182, 122);
+
+body{
+    background-color: $background;
+}
+
+.todo{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.texto{
+    margin-top: 20px;
+    text-align: center;
+    background-color: rgb(230, 230, 136);
+    width: 25%;
+    margin-left: 38%;
+}
+
+p{
+    font-size: 40px;
+}
+
+.productos{
+    background-color:rgb(230, 230, 136);
+    border: solid;
+    border-color: rgb(202, 160, 52);
+    height: 75%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.boton{
+    margin-left: 38%;
+    width: 25%;
+    background-color: rgb(230, 230, 136);
+    text-align: center;
+}
