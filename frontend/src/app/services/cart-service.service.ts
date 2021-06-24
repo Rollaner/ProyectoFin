@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/product';
-import { CartInterface } from '../interfaces/cart/cart-interface';
+import { CartInterface } from '../interfaces/cart-interface';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import {ProductService} from './product.service'
