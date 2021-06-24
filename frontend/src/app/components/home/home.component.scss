@@ -1,0 +1,32 @@
+$background:rgba(12, 83, 3, 0.678);
+$font-color:rgb(255, 255, 255);
+
+body{
+    background-color:$background ;
+}
+
+.todo{
+    background-color: rgb(230, 230, 136);;
+}
+.carousel-caption{
+    width: 70%;
+    color: $font-color;
+    font-size: 20px;
+    background-color: $background;
+}
+.carousel-caption h3{
+    font-size: 25px;
+}
+
+.picsum-img-wrapper img{
+    width: 75%;
+    height: 50%;
+    margin-left: 12.5%;
+}
+
+.texto{
+    text-align: center;
+    color: $font-color;
+    font-size: 25px;
+    font-style: italic;
+}
