@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { CartInterface } from '../interfaces/cart-interface';
 import { HttpClient } from '@angular/common/http';
-import { Subject, Observable } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 import {ProductService} from './product.service'
 import {UserService} from './user.service'
 
@@ -11,7 +11,8 @@ import {UserService} from './user.service'
 })
 export class CartServiceService {
 
-  cart = new Subject<CartInterface[]>(); //Carrito
+  cart = new ReplaySubject<CartInterface[]>(); //Carrito Es replaySubject porque el carrito no se inicia al
+  //tiempo de la actualizacion
   avisoCart$ = this.cart.asObservable(); //Observable del carrito
   contador:number = 0;  
   productStorage:CartInterface[] = []; //Array de memoria del carrito
@@ -31,7 +32,6 @@ export class CartServiceService {
       stock: item.Stock,
       price: item.Price,
      }
-     console.log(aux);
      return aux;
    }
 

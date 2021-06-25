@@ -5,30 +5,36 @@
       <mat-card-title>{{producto.Name}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>{{producto.Stock}}</p>
+      <p *ngIf="hayStock()">{{producto.Stock}}</p>
       <p>{{producto.Category}}</p>
       <p>{{producto.Price}}</p>
-      <p>{{producto.Rating}}</p>
-      <h4>{{producto.Contador}} han usado y calificado este producto</h4>
+      <p>{{producto.Promedio}}</p>
+      <h4>{{producto.Contador}} persona(s) han usado y calificado este producto</h4>
     </mat-card-content>
     <mat-card-actions>
       <button mat-button (click)="this.agregarCarrito()" *ngIf="hayStock()">Agregar al Carrito</button>
+      <button mat-button  *ngIf="!hayStock()" disabled="disabled">Producto no disponible</button>
       <button mat-button (click)="this.activarCalificacion()">Calificar Producto</button>
     </mat-card-actions>
 </mat-card>
 <div *ngIf="this.display">
-  <form [formGroup]="Formulario" (ngSubmit)="calificarProducto()">
-    <mat-form-field appearance="fill">
-      <mat-select formControlName="input">
-        <mat-option value="1">1</mat-option>
-        <mat-option value="2">2</mat-option>
-        <mat-option value="3">3</mat-option>
-        <mat-option value="4">4</mat-option>
-        <mat-option value="5">5</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-button (click)="this.calificarProducto()">Calificar Producto</button>
-  </form>
+  <div *ngIf="!this.calificado">
+    <form [formGroup]="Formulario" (ngSubmit)="calificarProducto()">
+      <mat-form-field appearance="fill">
+        <mat-select formControlName="input">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="4">4</mat-option>
+          <mat-option value="5">5</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button (click)="this.calificarProducto()">Calificar Producto</button>
+    </form>
+  </div>
+  <div *ngIf="this.calificado">
+      <p>Ya ha calificado el producto</p>
+  </div>
 </div>
 <div>
   <form [formGroup]="Comentario" (ngSubmit)="agregarComentario()">

@@ -4,8 +4,10 @@
             <p>Carrito de Compras</p>
         </div>
         <div class="productos">
-            <mat-list **ngFor="let product of products">
-                <span><mat-card>{{product.Name}}
+            <mat-list *ngFor="let product of cart">
+                <span><mat-card>
+                        <p>{{product.producto}}</p>
+                        <h6>Cant del producto: {{product.cant}}</h6>
                         <mat-card-actions>
                             <button mat-button (click)="this.addItem(product)">Add More</button>
                             <button mat-button (click)="this.addLess(product)">Remove item</button>

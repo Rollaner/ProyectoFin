@@ -20,37 +20,41 @@ export class CartComponent implements OnInit {
   }
 
   convert(item:CartInterface):Product{
-    let aux:Product;
-    aux.Name = item.producto;
-    aux.Stock = item.stock;
-    aux.Price = item.price;
+    let aux: Product = {
+      _id : "",
+      Category : "",
+      Rating : 0,
+      Contador : 1,
+      Promedio : 0,
+      Name : item.producto,
+      Stock : item.stock,
+      Price : item.price,
+    }
     return aux;
   }
 
   ngOnInit(): void {
     this.cartService.getCartData().subscribe(update =>{this.cart = update}); //Updatea carrito con service
-    this.display();
   }
 
-  display(){
-    let i:number = 0;
-    this.cart.forEach(element => {
-      this.products[i]=this.convert(element);     
-      console.log(this.products[i]) 
-    });
-  }
-
-  removeItem(item: Product){
-    console.log(item.Name);
-    this.cartService.removeFromCart(item); //elimina item del servicio
+  removeItem(aux: CartInterface){
+    let item = this.convert(aux);
+    this.cartService.deleteFromCart(item); //elimina item del servicio
+    this.cart.splice(this.cart.indexOf(aux),1);
     delete this.products[this.products.indexOf(item)]; //elimina item del componente
   }
 
-  addItem(item: Product){
+  addItem(aux: CartInterface){
+    let item = this.convert(aux);
+    this.cart[this.cart.indexOf(aux)].cant++
     this.cartService.addToCart(item);
   }
 
-  addLess(item:Product){
+  addLess(aux:CartInterface){
+    let item = this.convert(aux);
+    this.cart[this.cart.indexOf(aux)].cant--
+    if(this.cart[this.cart.indexOf(aux)].cant <= 0)
+      this.removeItem(aux);
     this.cartService.removeFromCart(item); 
   }
 
