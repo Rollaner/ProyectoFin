@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartServiceService} from 'src/app/services/cart-service.service';
-import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -18,6 +17,7 @@ export class ProductviewComponent implements OnInit {
   public Formulario: FormGroup;
   public Comentario: FormGroup
   display: boolean = false;
+  calificado: boolean = false;
 
   constructor(private fb:FormBuilder,private _snackBar: MatSnackBar, private cartServiceService: CartServiceService, private productService: ProductService) {
     this.Formulario = this.fb.group({
@@ -49,8 +49,13 @@ export class ProductviewComponent implements OnInit {
     }
   }
   calificarProducto(){
-    this.producto.Rating=parseInt(this.Formulario.value,10);
+    this.producto.Rating=this.producto.Rating + parseInt(this.Formulario.value.input,10);
+    this.producto.Contador++
+    this.producto.Promedio = this.producto.Rating/this.producto.Contador;
     this.productService.updateProduct(this.producto);
+    this.display = false;
+    this.calificado = true;
+
   }
   activarCalificacion(){
     this.display=true;
