@@ -5,6 +5,8 @@ import { ProductService } from 'src/app/services/product.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { CommentService } from 'src/app/services/comment.service';
+import { comment } from 'src/app/interfaces/comment';
 
 
 @Component({
@@ -15,12 +17,13 @@ import { UserService } from 'src/app/services/user.service';
 export class ProductviewComponent implements OnInit {
   @Input() ID: String;
   public producto: Product;
+  public comments: comment[];
   public Formulario: FormGroup;
   public Comentario: FormGroup
   display: boolean = false;
   calificado: boolean = false;
 
-  constructor(private fb:FormBuilder,private _snackBar: MatSnackBar, private cartServiceService: CartServiceService, private userService: UserService,private productService: ProductService) {
+  constructor(private fb:FormBuilder,private _snackBar: MatSnackBar, private commentService:CommentService ,private cartServiceService: CartServiceService, private userService: UserService,private productService: ProductService) {
     this.Formulario = this.fb.group({
       input: ['', Validators.required],
     });
@@ -32,6 +35,7 @@ export class ProductviewComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     try{
       this.producto= await this.productService.getProduct(this.ID).toPromise();
+      this.comments = await this.commentService.getAllComments(this.ID).toPromise();
     }
     catch{
       console.log("error");
@@ -67,7 +71,12 @@ export class ProductviewComponent implements OnInit {
       this._snackBar.open("Requiere ingresar antes de realizar esa accion", "ok");
       return;
     }
-    this.Comentario.value
+    let comentario:comment = {
+      User: this.userService.getUsername(),
+      Comment: this.Comentario.value,
+      product: this.ID,
+    } 
+    this.commentService.newComment(comentario)
   }
 }
 
