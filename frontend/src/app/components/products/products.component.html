@@ -15,7 +15,7 @@
             <mat-list *ngFor="let product of productList"> <!-- En la barra se puede añadir autocompletar para facilitar la busqueda -->
                 <mat-card *ngIf="default" class="productView">
                         <app-productview [routerLink]="['/products']" [ID]='product._id'
-                        routerLinkActive="router-link-active" mat-button>View Product</app-productview>
+                        routerLinkActive="router-link-active">View Product</app-productview>
                 </mat-card>
                 <mat-card *ngIf="product.Category == search">
                         <app-productview mat-button [routerLink]="['/products']" [ID]='product._id'

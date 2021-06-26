@@ -4,6 +4,7 @@ import { Product } from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class ProductviewComponent implements OnInit {
   display: boolean = false;
   calificado: boolean = false;
 
-  constructor(private fb:FormBuilder,private _snackBar: MatSnackBar, private cartServiceService: CartServiceService, private productService: ProductService) {
+  constructor(private fb:FormBuilder,private _snackBar: MatSnackBar, private cartServiceService: CartServiceService, private userService: UserService,private productService: ProductService) {
     this.Formulario = this.fb.group({
       input: ['', Validators.required],
     });
@@ -62,7 +63,11 @@ export class ProductviewComponent implements OnInit {
   }
 
   agregarComentario(){
-    console.log("comment")
+   if(!this.userService.isLoggedIn()){
+      this._snackBar.open("Requiere ingresar antes de realizar esa accion", "ok");
+      return;
+    }
+    this.Comentario.value
   }
 }
 
