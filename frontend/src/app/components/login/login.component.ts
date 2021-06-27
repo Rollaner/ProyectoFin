@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +9,24 @@ import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private fb:FormBuilder) {
+  display:boolean = false;
+  constructor(private fb:FormBuilder,private servicioUsuarios: UserService) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required, Validators.email],
-      pass:['', Validators.required]
-    });
+      email: ['', Validators.email],
+      pass:['']
+    },{validators: [Validators.required]});
    }
 
   ngOnInit(): void {
   }
   onSubmit() {
-    console.log(this.loginForm.value); //enviar formulario a servicio de log-in sanitizar de ser necesario
+    this.servicioUsuarios.getLogin(this.loginForm.get('email').value.toString(),this.loginForm.get('pass').value.toString(),)
+    if(this.servicioUsuarios.isLoggedIn()){
+      this.display = true;
+    }else
+      this.display = false;
+     //enviar formulario a servicio de log-in sanitizar de ser necesario
   }
+
+  
 }

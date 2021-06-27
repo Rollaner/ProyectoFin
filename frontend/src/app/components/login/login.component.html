@@ -1,7 +1,7 @@
 <body>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div>
-            <p>FANCY STORE</p>
+            <p>User Login</p>
         </div>
         <mat-form-field appearance="fill" class="form1">
             <input matInput placeholder="Email" formControlName="email">
@@ -9,6 +9,7 @@
         <mat-form-field appearance="fill" class="form2">
             <input matInput type="password" formControlName="pass" placeholder="password">
         </mat-form-field>
-        <button mat-button type="submit">Login</button>
+        <button mat-button type="submit" >Login</button>
     </form>
+    <div *ngIf="this.display"><h6 class="success">Bienvenido/a!</h6> </div>
 </body>
